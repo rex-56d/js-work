@@ -1,0 +1,37 @@
+{{# prettify }}
+<!DOCTYPE html>
+	<html lang="ja" prefix="og: http://ogp.me/ns#">
+	<head>
+
+		<meta charset="utf-8">
+		
+		<title>{{ meta.title }}</title>
+
+		<meta name="description" content="{{ meta.description }}">
+		
+		<meta name="keywords" content="{{ meta.keywords }}">
+
+		{{# each ogp }}
+			{{> ogp }}
+		{{/ each }}
+
+		<link rel="canonical" href="{{ meta.canonical }}">
+		
+		{{# styles }}
+			<link rel="stylesheet" href="{{ assets }}dist/css/{{ . }}">
+		{{/ styles}}
+
+		<!--[if lt IE 9]>
+			<script src="{{ assets }}dist/js/lib/html5shiv.min.js"></script>
+		<![endif]-->
+
+	</head>
+	<body>
+
+		{{> body }}
+
+		{{> script}}
+
+	</body>
+</html>
+{{/ prettify }}

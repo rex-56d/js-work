@@ -1,0 +1,10 @@
+[
+  {
+    "site_name": "$SITE_NAME",
+    "url": "$URL",
+    "title": "$TITLE",
+    "description": "$DESCRIPTION",
+    "image": "./img/thum.png",
+    "app_id": "$id"
+  }
+]
