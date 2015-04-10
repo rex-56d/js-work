@@ -205,7 +205,7 @@ grunt.initConfig({
       tasks: ['assemble']
     },
     css: {
-      files: ['<%= path.assets %>/stylesheet/sass/**/*.scss'],
+      files: ['<%= path.assets %>/sass/**/*.scss'],
       tasks: ['compass', 'autoprefixer']
     },
     img: {

@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+.custom-carousel {
+  position: relative;
+  width: 600px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  &__item {
+    position: relative;
+
+    > li {
+      width: 600px;
+      float: left;
+    }
+
+  }
+}
+
+.carousel-controler {
+  position: relative;
+
+  &__prev {
+    
+  }
+
+  &__next {
+
+  }
+
+}

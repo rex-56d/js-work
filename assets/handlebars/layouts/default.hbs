@@ -11,15 +11,13 @@
 		
 		<meta name="keywords" content="{{ meta.keywords }}">
 
-		{{# each ogp }}
-			{{> ogp }}
-		{{/ each }}
-
 		<link rel="canonical" href="{{ meta.canonical }}">
-		
+
 		{{# styles }}
 			<link rel="stylesheet" href="{{ assets }}dist/css/{{ . }}">
 		{{/ styles}}
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 		<!--[if lt IE 9]>
 			<script src="{{ assets }}dist/js/lib/html5shiv.min.js"></script>

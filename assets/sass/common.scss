@@ -4,8 +4,12 @@
 @import "compass";
 
 // Base
-@import "_base/normalize";
+@import
+"_base/normalize",
+"_base/reset",
+"_base/base";
 
 // Layouts
 
 // Modules
+@import "_modules/carousel";
