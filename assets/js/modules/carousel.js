@@ -1,87 +1,92 @@
 function Carousel (el) {
-  console.log(this);
-  this.$carousel = $(el);
-  this.$mainArea = this.$carousel.find('.js-carousel__item');
-  this.$carouselItem = this.$mainArea.find('li');
-  this.$carouselImg = this.$carouselItem.find('img');
-  this.$btnPrev = this.$carousel.find('.js-carousel-prev');
-  this.$btnNext = this.$carousel.find('.js-carousel-next');
-  this.$carousItemPositelCurrent = $('.is-carousel-current');
-
-  this.itemLength = this.$carouselItem.length;
-  this.imgWidth = this.$carouselImg.width();
-  this.carouselItemPosX = [];
-  this.initialSetup();
-  this.controler();
+  var _ = this;
+  _.$carousel = $(el);
+  _.$mainArea = _.$carousel.find('.js-carousel__item');
+  _.$carouselItem = _.$mainArea.find('li');
+  _.$carouselImg = _.$carouselItem.find('img');
+  _.$btnPrev = _.$carousel.find('.js-carousel-prev');
+  _.$btnNext = _.$carousel.find('.js-carousel-next');
+  _.$carouselCurrentClass = $('.is-carousel-current');
+  _.carouselCurrentClass = 'is-carousel-current';
+  _.itemLength = _.$carouselItem.length;
+  _.imgWidth = _.$carouselImg.width();
+  _.carouselItemPosX = [];
+  _.initialSetup();
+  _.controler();
 }
 
 Carousel.prototype.initialSetup = function () {
-  var self = this,
-      mainAreaWidth = this.itemLength * this.imgWidth;
+  var _ = this,
+      mainAreaWidth = _.itemLength * _.imgWidth;
 
-  this.$carouselItem.eq(0).addClass('is-carousel-current');
-  this.$btnPrev.attr('disabled', 'disabled');
+  _.$carouselItem.eq(0).addClass(_.carouselCurrentClass);
+  _.$btnPrev.attr('disabled', 'disabled');
+  _.$mainArea.css({ width: mainAreaWidth });
 
-  this.$mainArea.css({
-    width: mainAreaWidth
-  });
-
-  for ( var i = 0; self.itemLength > i; i++ ) {
-    self.carouselItemPosX [i] = (-(self.imgWidth * i));
+  for ( var i = 0; _.itemLength > i; i++ ) {
+    _.carouselItemPosX [i] = (-(_.imgWidth * i));
   }
 
 };
 
 Carousel.prototype.controler = function () {
-  var self = this;
+  var _ = this;
 
-  this.$btnPrev.on('click', function (e) {
+  _.$btnPrev.on('click', function (e) {
     e.preventDefault();
-    self.prev();
+    _.prev(this);
   });
 
-  this.$btnNext.on('click', function (e) {
+  _.$btnNext.on('click', function (e) {
     e.preventDefault();
-    self.next();
+    _.next(this);
   });
+
 };
 
 Carousel.prototype.prev = function () {
-  this.$btnNext.removeAttr('disabled');
-  var currentIndex = this.$carouselItem.index($('.is-carousel-current')),
+  var _ = this,
+      currentIndex = _.$carouselItem.index($('.is-carousel-current')),
       prevIndex = currentIndex - 1;
 
-  if ( currentIndex >= 0 ){
-    this.$carouselItem.eq( currentIndex ).removeClass('is-carousel-current');
-    this.$carouselItem.eq( prevIndex ).addClass('is-carousel-current');
+  _.$btnNext.removeAttr('disabled');
 
-    var firstchild = this.$carouselItem.first().hasClass('is-carousel-current');
+  if ( currentIndex >= 0 ){
+    _.$carouselItem.eq( currentIndex ).removeClass(_.carouselCurrentClass);
+    _.$carouselItem.eq( prevIndex ).addClass(_.carouselCurrentClass);
+
+    var firstchild = _.$carouselItem.first().hasClass(_.carouselCurrentClass);
     if (firstchild) {
-      this.$btnPrev.attr('disabled', 'disabled');
+      _.$btnPrev.attr('disabled', 'disabled');
     }
   }
-  this.move( prevIndex );
+  _.move( prevIndex );
 };
 
+
 Carousel.prototype.next = function () {
-  this.$btnPrev.removeAttr('disabled');
-  var currentIndex = this.$carouselItem.index($('.is-carousel-current')),
+  var _ = this,
+      currentIndex = _.$carouselItem.index($('.is-carousel-current')),
       nextIndex = currentIndex + 1;
 
-  if ( this.itemLength >= nextIndex ){
-    this.$carouselItem.eq( currentIndex ).removeClass('is-carousel-current');
-    this.$carouselItem.eq( nextIndex ).addClass('is-carousel-current');
+  _.$btnPrev.removeAttr('disabled');
+  
 
-    var lastchild = this.$carouselItem.last().hasClass('is-carousel-current');
+  if ( _.itemLength >= nextIndex ){
+    _.$carouselItem.eq( currentIndex ).removeClass(_.carouselCurrentClass);
+    _.$carouselItem.eq( nextIndex ).addClass(_.carouselCurrentClass);
+
+    var lastchild = _.$carouselItem.last().hasClass(_.carouselCurrentClass);
     if (lastchild) {
-      this.$btnNext.attr('disabled', 'disabled');
+      _.$btnNext.attr('disabled', 'disabled');
     }
   }
-  this.move( nextIndex );
+  _.move( nextIndex );
 };
 
 Carousel.prototype.move = function (nextIndex) {
-  this.$mainArea.css({
+  var _ = this;
+  _.$mainArea.css({
     left: this.carouselItemPosX[nextIndex]
   });
 };
