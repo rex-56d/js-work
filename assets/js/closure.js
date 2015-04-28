@@ -1,2 +1,2 @@
 // require
-var closure = require('./modules/closure'):
+var closure = require('./modules/closure');
