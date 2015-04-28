@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+// Compass
+@import "compass";
+
+
+// lazyload
+.lazy-img-list {
+  > li {
+    margin-top: 40px;
+  }
+}
